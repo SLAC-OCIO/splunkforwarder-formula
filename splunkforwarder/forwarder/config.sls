@@ -1,5 +1,6 @@
-{%- set self_cert = salt['pillar.get']('splunk:self_cert_filename', 'selfsignedcert.pem') %}
+{%- set self_cert = salt['pillar.get']('splunk:self_cert_filename', None) %}
 
+{% if self_cert %}
 include:
   - splunkforwarder.certs
   - splunkforwarder.user
@@ -47,3 +48,4 @@ include:
     - require:
       - pkg: splunkforwarder
       - file: /opt/splunkforwarder/etc/certs/{{ self_cert }}
+{% endif %}

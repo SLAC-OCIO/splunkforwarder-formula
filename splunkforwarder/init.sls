@@ -6,3 +6,6 @@ include:
   - splunkforwarder.certs
   - splunkforwarder.secret
   - splunkforwarder.user
+{% if salt['pillar.get']('splunkforwarder:deploymentclient', False) %}
+  - splunkforwarder.etc-apps-deploymentclient
+{% endif %}
